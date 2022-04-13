@@ -22,7 +22,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
 
     @org.springframework.web.bind.annotation.ExceptionHandler(value = {UserExceptions.class})
     protected ResponseEntity<Object> handleConflict(UserExceptions ex, WebRequest request) {
-        return new ResponseEntity<>(ErrorResponse.builder().mensaje(ex.getMessage()).build(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(ErrorResponse.builder().mensaje(ex.getMensaje()).build(), HttpStatus.BAD_REQUEST);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler(ConstraintViolationException.class)
@@ -50,8 +50,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
             .map(DefaultMessageSourceResolvable::getDefaultMessage)
             .collect(Collectors.toList());
         log.error("handleMethodArgumentNotValid: errors=[{}]", errorMessages);
-        return new ResponseEntity<>(ErrorResponse.builder().mensaje(errorMessages.get(0))
-
-                                        .build(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(ErrorResponse.builder().mensaje(errorMessages.get(0)).build(),
+                                    HttpStatus.BAD_REQUEST);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.usermanagment.service.dto;
 
+import com.example.usermanagment.service.dto.validation.ValidPassword;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -23,7 +24,10 @@ public class UserInDTO {
     @Email(message = "Not a valid email") @NotEmpty(message = "email can not be empty") String email;
 
     @ApiModelProperty(position = 3, required = true, example = "Hunter22")
-    @NotNull(message = "Password can not be null") @NotEmpty(message = "Password can not be empty") String password;
+    @NotNull(message = "Password can not be null")
+    @NotEmpty(message = "Password can not be empty")
+    @ValidPassword
+    String password;
 
     @ApiModelProperty(position = 4, required = true, example = "1")
     @NotNull(message = "City Code can not be empty") @NotEmpty(message = "cityCode can not be empty") String cityCode;
